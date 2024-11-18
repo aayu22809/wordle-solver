@@ -3,7 +3,6 @@ package com.wordlesolver.solver;
 import com.wordlesolver.model.WordleResult;
 import com.wordlesolver.util.EntropyTask;
 import com.wordlesolver.util.WordListLoader;
-import wordletester.WordleTester;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -76,7 +75,7 @@ public class WordleSolver implements com.wordlesolver.util.WordleSolver {
 
         try {
             answerWords = WordListLoader.loadAnswerWords();
-            guessWords = WordListLoader.loadGuessWords();
+            guessWords = WordListLoader.loadAnswerWords();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -87,9 +86,10 @@ public class WordleSolver implements com.wordlesolver.util.WordleSolver {
         for (String word : sublist) {
             int guesses = simulateGame(guessWords, word);
             sum += guesses;
-            ++i;
-            System.out.println("Average number of guesses: " + sum / (double) i);
+            i++;
         }
+
+        System.out.println("Average number of guesses: " + sum / (double) i);
 
     }
 
@@ -102,7 +102,7 @@ public class WordleSolver implements com.wordlesolver.util.WordleSolver {
             throw new RuntimeException(e);
         }
 
-        double sum = 0;
+        double sum = 1;
         int i = 0;
         List<String> sublist = answerWords.subList(minIndex, maxIndex);
         for (String word : sublist) {
@@ -120,17 +120,14 @@ public class WordleSolver implements com.wordlesolver.util.WordleSolver {
         WordleResult result = new WordleResult(possibleWords);
         String guess = "tares";
         int i = 0;
-        System.out.println("Word: " + word);
-        System.out.print("\t");
         while (!word.equals(guess)) {
             String pattern = generatePattern(word, guess);
             result.applyPattern(guess, pattern);
             i++;
             guess = new EntropyTask(result.getRemainingWords(), possibleWords).compute().keySet().toArray()[0].toString();
-            System.out.printf("Guess: %s; ", guess);
         }
 
-        return i;
+        return ++i;
     }
 
 }

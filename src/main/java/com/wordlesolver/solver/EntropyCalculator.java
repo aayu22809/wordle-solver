@@ -20,7 +20,8 @@ public class EntropyCalculator {
 
         for (Map.Entry<String, Integer> entry : patternCounts.entrySet()) {
             double probability = (double) entry.getValue() / possibilities;
-            information += probability * -Math.log(probability) / Math.log(2);
+//            information += probability * -Math.log(probability) / Math.log(2);
+            information += probability;
         }
 
         return information;

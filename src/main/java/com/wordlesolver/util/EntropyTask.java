@@ -16,7 +16,7 @@ public class EntropyTask extends RecursiveTask<Map<String, Double>> {
 
     @Override
     public Map<String, Double> compute() {
-        if (allWords.size() < 10) { // Small enough do it urself
+        if (allWords.size() < 9) { // Small enough do it urself
             return rankWordsByEntropy(allWords, possibleWords);
         } else {
             int mid = allWords.size() / 2;
