@@ -28,10 +28,16 @@ public class Main {
 
     public static void main(String[] args) {
         WordleSolver wordleSolver = new WordleSolver();
+
+        /*
         long start = nanoTime();
         wordleSolver.calcAvg(1000);
         long end = nanoTime();
         System.out.println("Time: " + (end - start) / 1_000_000 + "ms");
+        */
+
+
+        wordleSolver.playGame();
     }
 
 }

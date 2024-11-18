@@ -51,13 +51,17 @@ public class WordleSolver implements com.wordlesolver.util.WordleSolver {
     public void playGame() {
 
         String guess = BEST_GUESS;
-        while (true) {
+        String pattern = "";
+        int guesses = 0;
+        while (!pattern.equals("GGGGG")) {
             System.out.println("Remaining uncertainty: " + result.getUncertainty());
             System.out.printf("Guess: %s; Information: %f bits\n", guess, calculateEntropy(guess, result.getRemainingWords()));
-            String pattern = getUserInput("Pattern");
+            pattern = getUserInput("Pattern");
             makeGuess(guess, pattern);
             guess = getGuess();
+            guesses++;
         }
+        System.out.println("You won in " + guesses + " guesses!");
     }
 
     private static String getUserInput(String prompt) {
